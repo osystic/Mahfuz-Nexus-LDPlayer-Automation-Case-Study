@@ -1,0 +1,39 @@
+name: Validate Public Showcase
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  disclosure-boundary:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Required public artifacts
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f README.md
+          test -f case-study.md
+          test -f SECURITY.md
+          test -f OWNERSHIP.md
+          test -f NOTICE.md
+          test -f docs/disclosure-boundary.md
+          test -f docs/validation-evidence.md
+      - name: Block client-delivery binaries and source archives
+        shell: bash
+        run: |
+          set -euo pipefail
+          if find . -type f \( -name '*.exe' -o -name '*.dll' -o -name '*.pdb' -o -name '*.zip' -o -name '*.7z' \) | grep -q .; then
+            echo "Binary or delivery archive found in public showcase."
+            exit 1
+          fi
+      - name: High-confidence secret pattern scan
+        shell: bash
+        run: |
+          set -euo pipefail
+          if grep -RInE --exclude-dir=.git '(gh[pousr]_[A-Za-z0-9]{20,}|sk-[A-Za-z0-9_-]{20,}|AKIA[0-9A-Z]{16}|BEGIN (RSA |EC |OPENSSH )?PRIVATE KEY)' .; then
+            echo "Potential secret detected."
+            exit 1
+          fi

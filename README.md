@@ -1,10 +1,10 @@
-[Reading 104 lines from start (total: 104 lines, 0 remaining)]
-
 # Multi-LDPlayer Automation Control Center - Engineering Case Study
 
 OSYSTIC ENGINEERING CASE STUDY - PUBLIC SHOWCASE - SANITIZED - PORTFOLIO-SAFE
 
 This repository contains no client identity, confidential source code, credentials, private screenshots, private conversations, payment information, or proprietary delivery package.
+
+![Architecture](assets/architecture.svg)
 
 ## What this repository is
 
