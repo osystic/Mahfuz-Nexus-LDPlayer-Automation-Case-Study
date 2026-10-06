@@ -1,0 +1,16 @@
+schema_version: 1
+repository_class: public-showcase
+visibility: public
+lifecycle: maintenance
+business_owner: Shawaiz Arif
+technical_owner: OSYSTIC
+data_classification: public-sanitized
+portfolio:
+  eligible: true
+  status: approved-showcase
+delivery:
+  default_branch: main
+  ci_required: false
+controls:
+  secrets_in_git_allowed: false
+  public_publication_allowed: true
